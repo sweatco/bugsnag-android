@@ -59,11 +59,13 @@ final class AppNotRespondingMonitor {
         threadHandler.postDelayed(checker, CHECK_INTERVAL_MS);
     }
 
+    @SuppressWarnings("WeakerAccess") // avoid generating synthetic accessor
     @NonNull
     Handler getHandler() {
         return threadHandler;
     }
 
+    @SuppressWarnings("WeakerAccess") // avoid generating synthetic accessor
     @NonNull
     Delegate getDelegate() {
         return delegate;
