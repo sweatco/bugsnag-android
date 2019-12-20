@@ -1,7 +1,6 @@
 package com.bugsnag.android
 
 import java.io.IOException
-import java.util.HashMap
 
 /**
  * Information and associated diagnostics relating to a handled or unhandled
