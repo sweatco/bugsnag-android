@@ -30,22 +30,19 @@ class InternalReportDelegate implements EventStore.Delegate {
     private final AppDataCollector appDataCollector;
     private final DeviceDataCollector deviceDataCollector;
     private final Context appContext;
-    private final SessionTracker sessionTracker;
 
     InternalReportDelegate(Context context,
                            Logger logger,
                            ImmutableConfig immutableConfig,
                            StorageManager storageManager,
                            AppDataCollector appDataCollector,
-                           DeviceDataCollector deviceDataCollector,
-                           SessionTracker sessionTracker) {
+                           DeviceDataCollector deviceDataCollector) {
         this.logger = logger;
         this.immutableConfig = immutableConfig;
         this.storageManager = storageManager;
         this.appDataCollector = appDataCollector;
         this.deviceDataCollector = deviceDataCollector;
         this.appContext = context;
-        this.sessionTracker = sessionTracker;
     }
 
     @Override

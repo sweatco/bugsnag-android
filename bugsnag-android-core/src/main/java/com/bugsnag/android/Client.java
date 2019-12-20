@@ -183,8 +183,8 @@ public class Client implements MetadataAware, CallbackAware, UserAware {
         StorageManager storageManager
                 = (StorageManager) appContext.getSystemService(Context.STORAGE_SERVICE);
         InternalReportDelegate delegate = new InternalReportDelegate(appContext, logger,
-                immutableConfig, storageManager, appDataCollector, deviceDataCollector,
-                sessionTracker);
+                immutableConfig, storageManager, appDataCollector, deviceDataCollector
+        );
         eventStore = new EventStore(immutableConfig, appContext, logger, delegate);
 
         deliveryDelegate = new DeliveryDelegate(logger, eventStore,

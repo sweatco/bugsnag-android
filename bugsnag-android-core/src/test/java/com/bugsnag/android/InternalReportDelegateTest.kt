@@ -45,8 +45,7 @@ internal class InternalReportDelegateTest {
             config,
             storageManager,
             appDataCollector,
-            deviceDataCollector,
-            sessionTracker
+            deviceDataCollector
         )
 
         val handledState = HandledState.newInstance(HandledState.REASON_HANDLED_EXCEPTION)
