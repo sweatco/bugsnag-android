@@ -28,6 +28,7 @@ class EventStore extends FileStore {
     private static final int LAUNCH_CRASH_POLL_MS = 50;
     private static final int MAX_EVENT_COUNT = 32;
 
+    @SuppressWarnings("WeakerAccess") // avoid generating synthetic accessor
     volatile boolean flushOnLaunchCompleted = false;
     private final Semaphore semaphore = new Semaphore(1);
     private final ImmutableConfig config;
@@ -127,6 +128,7 @@ class EventStore extends FileStore {
         }
     }
 
+    @SuppressWarnings("WeakerAccess")  // avoid generating synthetic accessor
     void flushReports(Collection<File> storedReports) {
         if (!storedReports.isEmpty() && semaphore.tryAcquire(1)) {
             try {
@@ -211,7 +213,7 @@ class EventStore extends FileStore {
             storeDirectory, timestamp, uuid, suffix);
     }
 
-    boolean isStartupCrash(long durationMs) {
+    private boolean isStartupCrash(long durationMs) {
         return durationMs < config.getLaunchCrashThresholdMs();
     }
 }

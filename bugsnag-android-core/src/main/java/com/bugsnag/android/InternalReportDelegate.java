@@ -18,16 +18,19 @@ import java.util.concurrent.RejectedExecutionException;
 
 class InternalReportDelegate implements EventStore.Delegate {
 
-    static final String INTERNAL_DIAGNOSTICS_TAB = "BugsnagDiagnostics";
+    private static final String INTERNAL_DIAGNOSTICS_TAB = "BugsnagDiagnostics";
 
+    @SuppressWarnings("WeakerAccess") // avoid generating synthetic accessor
     final Logger logger;
-    final ImmutableConfig immutableConfig;
-    final StorageManager storageManager;
 
-    final AppDataCollector appDataCollector;
-    final DeviceDataCollector deviceDataCollector;
-    final Context appContext;
-    final SessionTracker sessionTracker;
+    @SuppressWarnings("WeakerAccess") // avoid generating synthetic accessor
+    final ImmutableConfig immutableConfig;
+    private final StorageManager storageManager;
+
+    private final AppDataCollector appDataCollector;
+    private final DeviceDataCollector deviceDataCollector;
+    private final Context appContext;
+    private final SessionTracker sessionTracker;
 
     InternalReportDelegate(Context context,
                            Logger logger,
@@ -65,7 +68,7 @@ class InternalReportDelegate implements EventStore.Delegate {
         reportInternalBugsnagError(err);
     }
 
-    void recordStorageCacheBehavior(Event event) {
+    private void recordStorageCacheBehavior(Event event) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             File cacheDir = appContext.getCacheDir();
             File errDir = new File(cacheDir, "bugsnag-errors");

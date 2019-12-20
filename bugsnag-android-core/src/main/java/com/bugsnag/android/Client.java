@@ -41,6 +41,7 @@ public class Client implements MetadataAware, CallbackAware, UserAware {
 
     private static final String SHARED_PREF_KEY = "com.bugsnag.android";
 
+    @SuppressWarnings("WeakerAccess") // avoid generating synthetic accessor
     final ImmutableConfig immutableConfig;
 
     final MetadataState metadataState;
@@ -63,14 +64,16 @@ public class Client implements MetadataAware, CallbackAware, UserAware {
     @NonNull
     protected final EventStore eventStore;
 
+    @SuppressWarnings("WeakerAccess") // avoid generating synthetic accessor
     final SystemBroadcastReceiver systemBroadcastReceiver;
     final SessionTracker sessionTracker;
 
     private final OrientationEventListener orientationListener;
     private final Connectivity connectivity;
     final Logger logger;
-    final DeliveryDelegate deliveryDelegate;
+    private final DeliveryDelegate deliveryDelegate;
 
+    @SuppressWarnings("WeakerAccess") // avoid generating synthetic accessor
     final ClientObservable clientObservable = new ClientObservable();
 
     /**

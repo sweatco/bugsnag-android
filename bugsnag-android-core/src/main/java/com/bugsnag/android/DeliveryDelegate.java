@@ -12,10 +12,10 @@ import java.util.concurrent.RejectedExecutionException;
 
 class DeliveryDelegate extends BaseObservable {
 
-    final Logger logger;
+    private final Logger logger;
     private final EventStore eventStore;
     private final ImmutableConfig immutableConfig;
-    final BreadcrumbState breadcrumbState;
+    private final BreadcrumbState breadcrumbState;
 
     DeliveryDelegate(Logger logger, EventStore eventStore,
                      ImmutableConfig immutableConfig, BreadcrumbState breadcrumbState) {

@@ -81,7 +81,7 @@ internal class AppDataCollector(
      *
      * @return the duration in ms
      */
-    internal fun calculateDurationInForeground(): Long {
+    private fun calculateDurationInForeground(): Long {
         val nowMs = System.currentTimeMillis()
         return sessionTracker.getDurationInForegroundMs(nowMs)
     }
@@ -115,6 +115,7 @@ internal class AppDataCollector(
 
     companion object {
 
+        @SuppressWarnings("WeakerAccess")  // avoid generating synthetic accessor
         internal val startTimeMs = SystemClock.elapsedRealtime()
 
         private const val RELEASE_STAGE_DEVELOPMENT = "development"

@@ -32,6 +32,8 @@ class SessionTracker extends BaseObservable implements Application.ActivityLifec
     private final ImmutableConfig configuration;
     private final CallbackState callbackState;
     private final Client client;
+
+    @SuppressWarnings("WeakerAccess") // avoid generating synthetic accessor
     final SessionStore sessionStore;
 
     // This most recent time an Activity was stopped.
@@ -42,6 +44,8 @@ class SessionTracker extends BaseObservable implements Application.ActivityLifec
     private final AtomicReference<Session> currentSession = new AtomicReference<>();
     private final Semaphore flushingRequest = new Semaphore(1);
     private final ForegroundDetector foregroundDetector;
+
+    @SuppressWarnings("WeakerAccess") // avoid generating synthetic accessor
     final Logger logger;
 
     SessionTracker(ImmutableConfig configuration, CallbackState callbackState,
@@ -235,6 +239,7 @@ class SessionTracker extends BaseObservable implements Application.ActivityLifec
     /**
      * Attempts to flush session payloads stored on disk
      */
+    @SuppressWarnings("WeakerAccess")  // avoid generating synthetic accessor
     void flushStoredSessions() {
         if (flushingRequest.tryAcquire(1)) {
             try {
@@ -273,6 +278,7 @@ class SessionTracker extends BaseObservable implements Application.ActivityLifec
         }
     }
 
+    @SuppressWarnings("WeakerAccess")  // avoid generating synthetic accessor
     DeliveryStatus deliverSessionPayload(SessionPayload payload) {
         DeliveryParams params = configuration.getSessionApiDeliveryParams();
         Delivery delivery = configuration.getDelivery();
@@ -322,7 +328,7 @@ class SessionTracker extends BaseObservable implements Application.ActivityLifec
         return activity.getClass().getSimpleName();
     }
 
-    void leaveLifecycleBreadcrumb(String activityName, String lifecycleCallback) {
+    private void leaveLifecycleBreadcrumb(String activityName, String lifecycleCallback) {
         leaveBreadcrumb(activityName, lifecycleCallback);
     }
 

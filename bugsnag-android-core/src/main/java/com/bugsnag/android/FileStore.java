@@ -137,7 +137,7 @@ abstract class FileStore {
         return null;
     }
 
-    void discardOldestFileIfNeeded() {
+    private void discardOldestFileIfNeeded() {
         // Limit number of saved errors to prevent disk space issues
         File exceptionDir = new File(storeDirectory);
         if (exceptionDir.isDirectory()) {
