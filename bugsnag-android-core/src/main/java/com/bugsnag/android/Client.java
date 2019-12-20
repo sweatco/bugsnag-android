@@ -63,15 +63,11 @@ public class Client implements MetadataAware, CallbackAware, UserAware {
     @NonNull
     protected final EventStore eventStore;
 
-    private final SessionStore sessionStore;
-
     final SystemBroadcastReceiver systemBroadcastReceiver;
     final SessionTracker sessionTracker;
-    private final SharedPreferences sharedPrefs;
 
     private final OrientationEventListener orientationListener;
     private final Connectivity connectivity;
-    private final StorageManager storageManager;
     final Logger logger;
     final DeliveryDelegate deliveryDelegate;
 
@@ -121,8 +117,6 @@ public class Client implements MetadataAware, CallbackAware, UserAware {
         warnIfNotAppContext(androidContext);
         appContext = androidContext.getApplicationContext();
 
-        storageManager = (StorageManager) appContext.getSystemService(Context.STORAGE_SERVICE);
-
         connectivity = new ConnectivityCompat(appContext, new Function1<Boolean, Unit>() {
             @Override
             public Unit invoke(Boolean connected) {
@@ -141,7 +135,7 @@ public class Client implements MetadataAware, CallbackAware, UserAware {
 
         callbackState = configuration.callbackState.copy();
 
-        sessionStore = new SessionStore(appContext, logger, null);
+        SessionStore sessionStore = new SessionStore(appContext, logger, null);
         sessionTracker = new SessionTracker(immutableConfig, callbackState, this,
                 sessionStore, logger);
         systemBroadcastReceiver = new SystemBroadcastReceiver(this, logger);
@@ -152,7 +146,8 @@ public class Client implements MetadataAware, CallbackAware, UserAware {
         metadataState = configuration.metadataState.copy(copy);
 
         // Set up and collect constant app and device diagnostics
-        sharedPrefs = appContext.getSharedPreferences(SHARED_PREF_KEY, Context.MODE_PRIVATE);
+        SharedPreferences sharedPrefs
+                = appContext.getSharedPreferences(SHARED_PREF_KEY, Context.MODE_PRIVATE);
 
         ActivityManager am =
                 (ActivityManager) appContext.getSystemService(Context.ACTIVITY_SERVICE);
@@ -182,6 +177,8 @@ public class Client implements MetadataAware, CallbackAware, UserAware {
                 + "breadcrumbs on API Levels below 14.");
         }
 
+        StorageManager storageManager
+                = (StorageManager) appContext.getSystemService(Context.STORAGE_SERVICE);
         InternalReportDelegate delegate = new InternalReportDelegate(appContext, logger,
                 immutableConfig, storageManager, appDataCollector, deviceDataCollector,
                 sessionTracker);
