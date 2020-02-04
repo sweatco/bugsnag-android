@@ -48,8 +48,6 @@ bsg_app_info * loadAppTestCase(jint num) {
 bsg_app_info * loadAppMetadataTestCase(jint num) {
     bsg_app_info *app = malloc(sizeof(bsg_app_info));
     strcpy(app->active_screen, "MainActivity");
-    strcpy(app->name, "PhotoSnap");
-    app->low_memory = true;
     return app;
 }
 
@@ -76,14 +74,7 @@ bsg_device_info * loadDeviceTestCase(jint num) {
 
 bsg_device_info * loadDeviceMetadataTestCase(jint num) {
     bsg_device_info *device = malloc(sizeof(bsg_device_info));
-    strcpy(device->brand, "Samsung");
-    strcpy(device->location_status, "cellular");
-    strcpy(device->network_access, "full");
-    strcpy(device->screen_resolution, "1024x768");
-    device->emulator = false;
     device->jailbroken = false;
-    device->dpi = 320;
-    device->screen_density = 3.5;
     return device;
 }
 
